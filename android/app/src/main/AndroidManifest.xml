@@ -26,8 +26,8 @@
               <category android:name="android.intent.category.BROWSABLE" />
 
               <data
-                  android:host="test-app"
-                  android:scheme="banked" />
+                  android:host="host"
+                  android:scheme="scheme" />
           </intent-filter>
       </activity>
     </application>

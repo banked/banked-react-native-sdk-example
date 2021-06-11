@@ -73,9 +73,9 @@ const App: () => Node = () => {
   };
 
   function start() {
-      const apiKey = "c432bdb9618b7b75936de40736248851"
+      const apiKey = "XXXXXXXXXXXXXXXXXXXXX"
       NativeModules.BankedSdk.initialise(apiKey)
-      NativeModules.BankedSdk.openBankedSdk("066a64dc-53ce-4b35-ba3f-f24e6cdd7f9a", "banked://test-app")
+      NativeModules.BankedSdk.openBankedSdk("XXXXXXXXXXXXXXXXXXXXX", "continue url")
   }
 
   return (
