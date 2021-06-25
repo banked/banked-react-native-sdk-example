@@ -151,6 +151,104 @@ More information on how to integrate Android SDK in an application can be found 
 
 ## iOS Integration
 
-TODO
+1. Use [Cocoapods](https://cocoapods.org/) to install the Banked Checkout SDK
 
-Information on iOS integration can be found at https://github.com/petterh/react-native-android-activity
+To integrate Banked Checkout SDK into your Xcode project using CocoaPods, specify it in your Podfile:
+
+```swift
+pod ‘Banked’, :git => ‘https://github.com/banked/banked-iOS.git’
+```
+Note: Banked is dynamic framework but Cocoapods builds pods by default as static libraries. To use a framework like this we’d normally use the use_frameworks!. However, this causes all pods to be compiled as dynamic frameworks which won't work for all React Native pods. To avoid this you can use plugin like [cocoapods-user-defined-build-types](https://github.com/joncardasis/cocoapods-user-defined-build-types )
+
+2. Create ``BankedCheckoutWrapper.swift`` to bridge between Banked iOS SDK and Objective-C 
+
+```
+import Foundation
+import UIKit
+import Banked
+
+@objc class BankedCheckoutWrapper: NSObject {
+     
+  @objc static let shared: BankedCheckoutWrapper = BankedCheckoutWrapper()
+  
+  @objc func setUp(apiKey: String) {
+    BankedCheckout.shared.setUp(apiKey)
+  }
+  
+  @objc func presentCheckout(viewController: UIViewController ,paymentId: String, continueURL: String) {
+    BankedCheckout.shared.presentCheckout(viewController , paymentId: paymentId, action: .pay, continueURL: continueURL) { response in
+      switch response {
+      case .success:
+        print("success")
+      case .failure(let error):
+        print("error \(error)")
+      }
+    }
+  }
+  
+  @objc func handlePayment(url: URL) {
+    
+    BankedCheckout.shared.handlePaymentWithURL(url, action: .pay) { response in
+      switch response {
+      case .success:
+        print("success")
+      case .failure(let error):
+        print("error \(error)")
+      }
+    }
+  }
+}
+
+```
+
+3. Create ``BankedSdk`` Objective-C class to bridge between the React Native code and call into the ``BankedCheckoutWrapper``. 
+
+Add the following to BankedSdk.h: 
+
+```
+#import <Foundation/Foundation.h>
+#import "React/RCTBridge.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface BankedSdk : NSObject <RCTBridgeModule>
+
+@end
+
+NS_ASSUME_NONNULL_END
+
+```
+
+Next up, implemennt the native module as follows: 
+
+```
+#import "BankedSdk.h"
+#import "React/RCTLog.h"
+#import "BankedReactNativeExample-Swift.h"
+
+@implementation BankedSdk
+
+RCT_EXPORT_MODULE();
+
+RCT_EXPORT_METHOD(initialise:(NSString *)apiKey)
+{
+  [[BankedCheckoutWrapper shared] setUpWithApiKey: apiKey];
+}
+
+RCT_EXPORT_METHOD(openBankedSdk:(NSString *)paymentId and:(NSString *)continueUrl)
+{
+  dispatch_async(dispatch_get_main_queue(), ^{
+    UIViewController *presentedViewController = RCTPresentedViewController();
+    
+    [[BankedCheckoutWrapper shared] presentCheckoutWithViewController: presentedViewController  paymentId: paymentId continueURL: continueUrl];
+  });
+}
+
+RCT_EXPORT_METHOD(handlePaymentForURL:(NSURL *)url)
+{
+  [[BankedCheckoutWrapper shared] handlePaymentWithUrl: url];
+}
+
+@end
+
+```
