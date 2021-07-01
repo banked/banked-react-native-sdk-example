@@ -156,7 +156,7 @@ More information on how to integrate Android SDK in an application can be found 
 To integrate Banked Checkout SDK into your Xcode project using CocoaPods, specify it in your Podfile:
 
 ```swift
-pod ‘Banked’, :git => ‘https://github.com/banked/banked-iOS.git’
+pod ‘Banked’
 ```
 Note: Banked is dynamic framework but Cocoapods builds pods by default as static libraries. To use a framework like this we’d normally use the use_frameworks!. However, this causes all pods to be compiled as dynamic frameworks which won't work for all React Native pods. To avoid this you can use plugin like [cocoapods-user-defined-build-types](https://github.com/joncardasis/cocoapods-user-defined-build-types )
 

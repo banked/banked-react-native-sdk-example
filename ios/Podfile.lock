@@ -1,5 +1,5 @@
 PODS:
-  - Banked (0.0.11):
+  - Banked (0.0.16):
     - Sentry
   - boost-for-react-native (1.63.0)
   - CocoaAsyncSocket (7.6.5)
@@ -326,7 +326,7 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
-  - Banked (from `https://github.com/banked/banked-iOS.git`)
+  - Banked
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -379,6 +379,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Banked
     - boost-for-react-native
     - CocoaAsyncSocket
     - Flipper
@@ -394,8 +395,6 @@ SPEC REPOS:
     - YogaKit
 
 EXTERNAL SOURCES:
-  Banked:
-    :git: https://github.com/banked/banked-iOS.git
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
@@ -453,13 +452,8 @@ EXTERNAL SOURCES:
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
-CHECKOUT OPTIONS:
-  Banked:
-    :commit: ab4ae92e24af20fe40c8e7e5f33daa4411fd5386
-    :git: https://github.com/banked/banked-iOS.git
-
 SPEC CHECKSUMS:
-  Banked: 6de93f27fb1c7054fdcecddee2afff3220fc34cf
+  Banked: 77a791e1504baee88a30437f06bfd787e27aae74
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
@@ -502,6 +496,6 @@ SPEC CHECKSUMS:
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 27a758d2f50d909ecf6995837c0da86dbbee04c9
+PODFILE CHECKSUM: 0943c491d9848960bb34bc50a51d1e44baa4e3b1
 
 COCOAPODS: 1.10.1

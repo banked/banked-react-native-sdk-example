@@ -14,8 +14,7 @@ target 'BankedReactNativeExample' do
     :hermes_enabled => false
   )
 
-  pod ‘Banked’, :build_type => :dynamic_framework, :git => ‘https://github.com/banked/banked-iOS.git’
-
+  pod ‘Banked’, :build_type => :dynamic_framework
   target 'BankedReactNativeExampleTests' do
     inherit! :complete
     # Pods for testing
