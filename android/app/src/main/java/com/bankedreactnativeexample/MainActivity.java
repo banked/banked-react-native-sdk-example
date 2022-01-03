@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.banked.checkout.Banked;
 import com.banked.checkout.OnPaymentSessionListener;
 import com.banked.checkout.feature.status.model.PaymentResult;
@@ -39,13 +41,20 @@ public class MainActivity extends ReactActivity implements OnPaymentSessionListe
     }
 
     @Override
-    public void onPaymentFailed(PaymentResult paymentResult) {
+    public void onPaymentFailed(@NonNull PaymentResult paymentResult) {
+        Log.d("Banked", "onPaymentFailed!");
         displayJavascriptAlert("Payment failed");
     }
 
     @Override
-    public void onPaymentSuccess(PaymentResult paymentResult) {
+    public void onPaymentSuccess(@NonNull PaymentResult paymentResult) {
+        Log.d("Banked", "onPaymentSuccess - " + paymentResult.toString());
         displayJavascriptAlert("Payment success");
+    }
+
+    @Override
+    public void onPaymentAborted() {
+        Log.d("Banked", "onPaymentAborted");
     }
 
     private void displayJavascriptAlert(String message) {
