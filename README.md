@@ -7,7 +7,7 @@ Here is an example project on how to integrate the existing native Android and i
 1. Add the latest gradle dependency into the Android app module build file
 
 ```
-implementation "com.banked:checkout:2.0.0-rc1"
+implementation "com.banked:checkout:2.0.1-beta12"
 ```
 
 2. Add an intent filter into the application manin activity so that the SDK can receive events from the banking providers
