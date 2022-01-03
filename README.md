@@ -130,6 +130,11 @@ public class MainActivity extends ReactActivity implements OnPaymentSessionListe
     public void onPaymentSuccess(PaymentResult paymentResult) {
         displayJavascriptAlert("Payment success");
     }
+    
+    @Override
+    public void onPaymentAborted() {
+        Log.d("Banked", "onPaymentAborted");
+    }
 
     private void displayJavascriptAlert(String message) {
         MainApplication application = (MainApplication) getApplication();
