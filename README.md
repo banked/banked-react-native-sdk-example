@@ -178,7 +178,7 @@ And to use the proper pod add:
 ```
 pod 'Banked', :build_type => :dynamic_framework
 ```
-Because Banked is an XCFramework, we also need iOS13, so in your Podfile ad also this: ``platform :ios, '13.0'``.
+Because Banked is an XCFramework, we also need iOS13, so in your Podfile add this: ``platform :ios, '13.0'``.
 
 2. Create ``BankedCheckoutWrapper.swift`` to bridge between Banked iOS SDK and Objective-C 
 
