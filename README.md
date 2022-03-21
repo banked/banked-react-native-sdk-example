@@ -163,7 +163,22 @@ To integrate Banked Checkout SDK into your Xcode project using CocoaPods, specif
 ```swift
 pod ‘Banked’
 ```
-Note: Banked is dynamic framework but Cocoapods builds pods by default as static libraries. To use a framework like this we’d normally use the use_frameworks!. However, this causes all pods to be compiled as dynamic frameworks which won't work for all React Native pods. To avoid this you can use plugin like [cocoapods-user-defined-build-types](https://github.com/joncardasis/cocoapods-user-defined-build-types )
+**Note**: Banked is dynamic framework (with some dependecies, like Sentry) but Cocoapods builds pods by default as static libraries. To use a framework like this we’d normally use the ``use_frameworks!``. However, this causes all pods to be compiled as dynamic frameworks which won't work for all React Native pods. To avoid this you can use plugin like [cocoapods-user-defined-build-types](https://github.com/joncardasis/cocoapods-user-defined-build-types)
+
+Full explanation of this problem here: [Swift Dynamic Frameworks & React Native] (https://medium.com/@joncardasis/swift-dynamic-frameworks-react-native-3d77c4972f32)
+
+You will have to modify your ``Gemfile`` in the root folder and add something like ``gem 'cocoapods-user-defined-build-types'``. Then run ``bundle install``.
+
+Add this to the top of your ``Podfile``:
+```
+plugin 'cocoapods-user-defined-build-types'
+enable_user_defined_build_types!
+```
+And to use the proper pod add:
+```
+pod 'Banked', :build_type => :dynamic_framework
+```
+Because Banked is an XCFramework, we also need iOS13, so in your Podfile ad also this: ``platform :ios, '13.0'``.
 
 2. Create ``BankedCheckoutWrapper.swift`` to bridge between Banked iOS SDK and Objective-C 
 
